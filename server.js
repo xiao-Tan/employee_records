@@ -48,6 +48,7 @@ app.listen(8000, () => {
 
 app.get('/data', (request, response) => {
     generateData()
+    console.log("data generated")
 })
 
 app.get('/records', (request, response) => {

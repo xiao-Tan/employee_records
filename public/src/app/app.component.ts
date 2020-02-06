@@ -8,10 +8,9 @@ import { HttpService } from './http.service';
 })
 export class AppComponent implements OnInit {
   title = 'Employee Records';
-  //records: any;
   public users: any;
   public totalUsersAmount: number = 0;
-  private _currentPage: number = 1;
+  private currentPage: number = 1;
   search_name: any
   search_type: any
 
@@ -26,21 +25,12 @@ export class AppComponent implements OnInit {
     this.goToPage(1);
   }
 
-  // getAllRec(){
-  //   this._httpService.getAll()
-  //     .subscribe(data => {
-  //       this.users = data['result']
-  //       this.totalUsersAmount = data['result'].length;
-  //       console.log(this.totalUsersAmount)
-  //     })
-  // }
-
   public goToPage(page: number): void {
-    this._currentPage = page;
-    this._loadUsers(this._currentPage);
+    this.currentPage = page;
+    this.loadUsers(this.currentPage);
   }
 
-  private _loadUsers(page: number = 1) {
+  private loadUsers(page: number = 1) {
     console.log("Curr Page" + page)
     this._httpService.getDataForPage(page)
       .subscribe(data => {
@@ -48,7 +38,7 @@ export class AppComponent implements OnInit {
       }) 
   }
 
-  onSubmit() {
+  public onSubmit() {
     console.log("I am in")
     console.log(this.search_type)
     console.log(this.search_name)

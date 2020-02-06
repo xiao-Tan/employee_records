@@ -1,45 +1,46 @@
 <br>
 <div class="container text-center">
-  <h1 >Employees Records</h1>
+  <h1>Welcome to Employees Records Page</h1>
   <hr>
 
   <form (submit)="onSubmit()">
-    <div class="form-group">
-      <input type="text" [(ngModel)]="search_name" name="name">
-      &nbsp;&nbsp;
-      <select [(ngModel)]="search_type" name="search_type">
-        <option value="Name" selected="selected">Search By Name</option>
-        <option value="Address">Search By Address</option>
-      </select>
-      &nbsp;&nbsp;
-      <button class="btn btn-outline-info" type="submit">Search</button>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <input type="text" [(ngModel)]="search_name" name="name" class="form-control" placeholder="name or address">
+        &nbsp;&nbsp;
+      </div>
+      <div class="form-group col-md-6">
+        <select [(ngModel)]="search_type" name="search_type" class="form-control">
+          <option value="Name" selected="selected">Search By Name</option>
+          <option value="Address">Search By Address</option>
+        </select>
+        &nbsp;&nbsp;
+      </div>
     </div>
+    <button class="btn btn-outline-info" type="submit">Search</button>
+
   </form>
 
-  <app-pagination
-        [setPagination]="{
+  <app-pagination [setPagination]="{
           'itemsCount': totalUsersAmount,
           'pageSize': 20
-        }"
-        (goToPage)="goToPage($event)">
+        }" (goToPage)="goToPage($event)">
   </app-pagination>
 
   <table class="table table-striped table-active">
     <thead class="thead-dark">
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Address</th>
-        </tr>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+      </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let user of users">
-            <th scope="row">{{ user.name }}</th>
-            <td>{{ user.address }}</td>
-        </tr>
+      <tr *ngFor="let user of users">
+        <th scope="row">{{ user.name }}</th>
+        <td>{{ user.address }}</td>
+      </tr>
     </tbody>
   </table>
-
-  
 
 </div>
 

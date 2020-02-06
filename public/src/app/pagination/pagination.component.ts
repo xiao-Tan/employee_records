@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+
 export interface MyPagination {
   itemsCount: number;
   pageSize: number;
@@ -10,8 +11,10 @@ export interface MyPagination {
   styleUrls: ['./pagination.component.css']
 })
 export class PaginationComponent {
+
   public pagesArray: Array<number> = [];
   public currentPage: number = 1;
+
   @Input() set setPagination(pagination: MyPagination) {
     if (pagination) {
       const pagesAmount = Math.ceil(
