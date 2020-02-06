@@ -24,11 +24,9 @@ const records = new mongoose.Schema({
         required: true,
         lowercase: true,
         trim: true,
-        maxlength: 10
     },
     address: {
         type: String,
-        minlength: 10
     },
 });
 const Employees = mongoose.model('Employees', records);
@@ -45,12 +43,35 @@ function generateData(){
 
 app.listen(8000, () => {
     console.log("listening on port 8000");
-    generateData()
+    // generateData();
 });
+
+app.get('/data', (request, response) => {
+    generateData()
+})
 
 app.get('/records', (request, response) => {
     Employees.find()
         .then(data => response.json({ message: "success", result: data }))
         .catch(err => response.json(err))
 });
+
+app.get('/records/:pageId', (request, response) => {
+    console.log("your get getting page: " + request.params.pageId);
+    var perPage = 20;
+    var page = request.params.pageId - 1
+    Employees.find().limit(perPage).skip(page * perPage).then(data => response.json({ message: "success", result: data }))
+});
+
+app.get('/records/name/:name', (request, response) => {
+    Employees.find({ name: request.params.name })
+        .then(data => response.json({ message: "success", result: data }))
+        .catch(err => response.json(err))
+})
+
+app.get('/records/address/:address', (request, response) => {
+    Employees.find({ address: request.params.address })
+        .then(data => response.json({ message: "success", result: data }))
+        .catch(err => response.json(err))
+})
 

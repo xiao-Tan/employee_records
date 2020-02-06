@@ -11,6 +11,19 @@ export class HttpService {
   getAll(){
     return this._http.get('/records');
   }
-  
+
+  getDataForPage(page: any){
+    console.log('/records/' + page)
+    return this._http.get('/records/' + page);
+  }
+
+  getbyname(name:any){
+    return this._http.get('/records/name/' + name);
+  }
+
+  getbyaddr(addr:any){
+    return this._http.get('/records/address/' + addr);
+  }
+
 }
 
